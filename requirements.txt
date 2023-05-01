@@ -1,8 +1,8 @@
+import keras
 numpy>=1.18.5
 tensorflow-cpu==2.8.1
 opencv-python-headless==4.5.3.56
 mtcnn-opencv
-keras
 numpy
 scipy
 Pillow
