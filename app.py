@@ -46,7 +46,7 @@ def predict_image(img, model, threshold):
 st.title('Car Damage Predictor')
 st.markdown('Upload an image of a car to see if it is damaged or not.')
 st.sidebar.title('Settings')
-threshold = st.sidebar.slider('Threshold', 0.0, 1.0, 0.7 , 0.5, 0.01)
+threshold = st.sidebar.slider('Threshold', 0.0, 1.0, 0.5, 0.01)
 def main():
   uploaded_file = st.file_uploader('Upload an image', type=['jpg', 'jpeg', 'png'])
   if uploaded_file is not None:
