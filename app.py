@@ -15,6 +15,9 @@ from lime import lime_image
 
 model = tf.keras.models.load_model(r"dmg_car-weights-CNN.h5")
 explainer = lime_image.LimeImageExplainer()
+
+# Define the segmenter function for better explanations
+segmenter = SegmentationAlgorithm('slic', n_segments=50, compactness=10, sigma=1)
 #
 def predict_image(img, model, threshold):
     # Load and preprocess the image
@@ -31,9 +34,8 @@ def predict_image(img, model, threshold):
     else:
         result = 'damaged'
      # Generate an explanation of the prediction using LIME
-    expl = explainer.explain_instance(img_array[0], model.predict, top_labels=2, hide_color=0, num_samples=1000)
-    explanation = '\n'.join([f'{round(x[1]*100, 2)}% {x[0]}' for x in expl.local_exp[0]])
-    
+    expl = explainer.explain_instance(img_array[0], model.predict, top_labels=2, hide_color=0, num_samples=1000, segmentation_fn=segmenter)
+    explanation = expl.get_image_and_mask(expl.top_labels[0], positive_only=True, num_features=10, hide_rest=True)[0]
     
     
     # Return the result
@@ -56,7 +58,8 @@ def main():
             result,explanation= predict_image(uploaded_file, model, threshold)
             progress_bar.progress(100)
             st.write('Prediction:', result)
-            st.write('Explanation:', explanation)
+            st.write('Explanation:')
+            st.image(explanation, caption='Explanation', use_column_width=True)
 
 if __name__ == "__main__":
     main()
