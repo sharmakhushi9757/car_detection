@@ -1,6 +1,6 @@
 numpy
 tensorflow
-opencv-python-headless
+opencv-python-headless==4.5.3.56
 mtcnn-opencv
 numpy
 scipy
@@ -9,5 +9,4 @@ cython
 matplotlib
 scikit-image
 keras
-opencv-python
 h5py
