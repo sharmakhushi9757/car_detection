@@ -60,7 +60,7 @@ def main():
             progress_bar.progress(100)
             st.write('Prediction:', result)
             st.write('Explanation:')
-            st.image(explanation, caption='Explanation', use_column_width=True)
+            st.image(explanation, caption='Explanation', use_column_width=True,clamp=True, channels='BGR')
 
 if __name__ == "__main__":
     main()
