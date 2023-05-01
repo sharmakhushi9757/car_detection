@@ -30,8 +30,10 @@ def predict_image(img, model, threshold):
         result = 'good'
     else:
         result = 'damaged'
+     # Generate an explanation of the prediction using LIME
     expl = explainer.explain_instance(img_array[0], model.predict, top_labels=2, hide_color=0, num_samples=1000)
     explanation = '\n'.join([f'{round(x[1]*100, 2)}% {x[0]}' for x in expl.as_list()])
+
     
     
     # Return the result
@@ -41,18 +43,18 @@ def predict_image(img, model, threshold):
 
 
 #
-st.set_page_config(page_title='Car Damage Predictor', page_icon=':car:', layout='wide')
 st.title('Car Damage Predictor')
 st.markdown('Upload an image of a car to see if it is damaged or not.')
-st.sidebar.title('How it works')
-st.sidebar.markdown('This app uses a pre-trained convolutional neural network (CNN) to predict whether a car is damaged or not based on an image of the car. The CNN was trained on a dataset of car images, some of which were labeled as damaged and some of which were labeled as not damaged. The app uses the [LIME](https://github.com/marcotcr/lime) library to generate an explanation of how the CNN arrived at its prediction.')
+st.sidebar.title('Settings')
+threshold = st.sidebar.slider('Threshold', 0.0, 1.0, 0.7 , 0.5, 0.01)
 def main():
-  threshold=0.7
   uploaded_file = st.file_uploader('Upload an image', type=['jpg', 'jpeg', 'png'])
   if uploaded_file is not None:
         st.image(uploaded_file, caption='Input image', use_column_width=True)
         if st.button('Predict'):
+            progress_bar = st.progress(0)
             result,explanation= predict_image(uploaded_file, model, threshold)
+            progress_bar.progress(100)
             st.write('Prediction:', result)
             st.write('Explanation:', explanation)
 
