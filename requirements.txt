@@ -1,6 +1,6 @@
-numpy>=1.18.5
-tensorflow-cpu==2.8.1
-opencv-python-headless==4.5.3.56
+numpy
+tensorflow
+opencv-python-headless
 mtcnn-opencv
 numpy
 scipy
@@ -8,7 +8,7 @@ Pillow
 cython
 matplotlib
 scikit-image
-keras>=2.0.8
+keras
 opencv-python
 h5py
 imgaug
