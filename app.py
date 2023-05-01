@@ -32,8 +32,8 @@ def predict_image(img, model, threshold):
         result = 'damaged'
      # Generate an explanation of the prediction using LIME
     expl = explainer.explain_instance(img_array[0], model.predict, top_labels=2, hide_color=0, num_samples=1000)
-    explanation = '\n'.join([f'{round(x[1]*100, 2)}% {x[0]}' for x in expl.as_list()])
-
+    explanation = '\n'.join([f'{round(x[1]*100, 2)}% {x[0]}' for x in expl.local_exp[0]])
+    
     
     
     # Return the result
