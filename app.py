@@ -10,6 +10,7 @@ from tensorflow.keras.preprocessing.image import load_img , img_to_array
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 import streamlit as st
 from lime import lime_image
+from lime.wrappers.scikit_image import SegmentationAlgorithm
 
 
 
