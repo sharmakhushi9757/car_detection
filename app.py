@@ -69,15 +69,7 @@ def main():
         else:
             st.warning('Please upload an image.')
   #
-  '''if uploaded_file is not None:
-        st.image(uploaded_file, caption='Input image', use_column_width=True)
-        if st.button('Predict'):
-            progress_bar = st.progress(0)
-            result,explanation= predict_image(uploaded_file, model, threshold)
-            progress_bar.progress(100)
-            st.write('Prediction:', result)
-            st.write('Explanation:')
-            st.image(explanation, caption='Explanation', use_column_width=True,clamp=True, channels='BGR')'''
+
 
 if __name__ == "__main__":
     main()
