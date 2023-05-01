@@ -22,22 +22,28 @@ segmenter = SegmentationAlgorithm('slic', n_segments=50, compactness=10, sigma=1
 #
 def predict_image(img, model, threshold):
     # Load image and preprocess it
-    img = load_img(img,target_size=(64,64,3))
+    img = load_img(img, target_size=model.input_shape[1:4])
     img_array = img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
     img_array /= 255.
-   
+    
     # Make predictions using the model
-    prediction = model.predict(img_array)
+    prediction = model.predict(img_array)[0][0]
+    
+    # Check if the prediction is above the threshold
+    if prediction >= threshold:
+        result = 'damaged'
+    else:
+        result = 'not damaged'
     
     
     # Generate LIME explanation
     explanation = explainer.explain_instance(img_array[0], model.predict, segmentation_fn=segmenter)
-    top_labels = prediction.argsort()[0][-3:]
+    top_labels = prediction
     explanation_html = explanation.as_html(top_labels=top_labels)
     
     # Return prediction and explanation as a dictionary
-    return {'prediction': prediction[0], 'explanation_html': explanation_html}
+    return {'prediction': prediction, 'explanation_html': explanation_html}
 
 
 
