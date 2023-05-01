@@ -34,7 +34,17 @@ def predict_image(img, model, threshold):
 
 
 #
+st.markdown("""
+<style>
+body {
+  background: #ff0099; 
+  background: -webkit-linear-gradient(to right, #ff0099, #493240); 
+  background: linear-gradient(to right, #ff0099, #493240); 
+}
+</style>
+    """, unsafe_allow_html=True)
 st.title('Car Damage Predictor')
+st.write("---")
 st.markdown('Upload an image of a car to see if it is damaged or not.')
 st.sidebar.title('Settings')
 threshold = st.sidebar.slider('Threshold', 0.0, 1.0, 0.5, 0.01)
