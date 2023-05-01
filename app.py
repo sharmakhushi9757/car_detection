@@ -30,11 +30,7 @@ def predict_image(img, model, threshold):
     # Make predictions using the model
     prediction = model.predict(img_array)
     
-    # Check if the prediction is above the threshold
-    '''if prediction >= threshold:
-        result = 'good'
-    else:
-        result = 'damaged''''
+    
     # Generate LIME explanation
     explanation = explainer.explain_instance(img_array[0], model.predict, segmentation_fn=segmenter)
     top_labels = prediction.argsort()[0][-3:]
