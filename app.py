@@ -42,7 +42,7 @@ def main():
   uploaded_file = st.file_uploader('Upload an image', type=['jpg', 'jpeg', 'png'])
   if st.button('Predict'):
         progress_bar = st.progress(0)
-        result = predict_image(uploaded_file, models[model_index], threshold)
+        result = predict_image(uploaded_file, model, threshold)
         progress_bar.progress(100)
         st.write('Prediction:', result)
   else:
