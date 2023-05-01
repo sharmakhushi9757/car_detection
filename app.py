@@ -12,8 +12,9 @@ import streamlit as st
 from lime import lime_image
 
 
-model = tf.keras.models.load_model(r"dmg_car-weights-CNN.h5")
 
+model = tf.keras.models.load_model(r"dmg_car-weights-CNN.h5")
+explainer = lime_image.LimeImageExplainer()
 #
 def predict_image(img, model, threshold):
     # Load and preprocess the image
@@ -46,7 +47,6 @@ st.markdown('Upload an image of a car to see if it is damaged or not.')
 st.sidebar.title('How it works')
 st.sidebar.markdown('This app uses a pre-trained convolutional neural network (CNN) to predict whether a car is damaged or not based on an image of the car. The CNN was trained on a dataset of car images, some of which were labeled as damaged and some of which were labeled as not damaged. The app uses the [LIME](https://github.com/marcotcr/lime) library to generate an explanation of how the CNN arrived at its prediction.')
 def main():
-  st.title("Car Detection")
   threshold=0.7
   uploaded_file = st.file_uploader('Upload an image', type=['jpg', 'jpeg', 'png'])
   if uploaded_file is not None:
