@@ -14,10 +14,9 @@ import streamlit as st
 model = tf.keras.models.load_model(r"dmg_car-weights-CNN.h5")
 
 #
-
-def predict_image(file_path, model, threshold):
+def predict_image(img, model, threshold):
     # Load and preprocess the image
-    img = load_img(file_path, target_size=model.input_shape[1:4])
+    img = load_img(img, target_size=model.input_shape[1:4])
     img_array = img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
     
@@ -35,24 +34,18 @@ def predict_image(file_path, model, threshold):
 
 
 
+
 #
 
 def main():
   st.title("Car Detection")
-
-  uploaded_file = st.file_uploader("Upload image", type=['jpeg', 'png', 'jpg', 'webp'])
   threshold=0.7
+  uploaded_file = st.file_uploader('Upload an image', type=['jpg', 'jpeg', 'png'])
   if uploaded_file is not None:
-     path_in = uploaded_file.name
-     #file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
-     #image = cv2.imdecode(file_bytes, 1)
-     # Call the function and display the result in Streamlit
-     result=predict_image(path_in, model,threshold)
-     #st.image(image, caption='Input image', use_column_width=True)
-     st.write('Prediction:', result)
-     
-     
-     
+        st.image(uploaded_file, caption='Input image', use_column_width=True)
+        if st.button('Predict'):
+            result = predict_image(uploaded_file, model, threshold)
+            st.write('Prediction:', result)
 
 if __name__ == "__main__":
     main()
