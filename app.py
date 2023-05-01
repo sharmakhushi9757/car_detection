@@ -13,9 +13,6 @@ import streamlit as st
 model = tf.keras.models.load_model(r"dmg_car-weights-CNN.h5")
 
 #
-import streamlit as st
-import numpy as np
-from tensorflow.keras.preprocessing import image
 
 def predict_image(file_path, model, threshold):
     # Load and preprocess the image
@@ -45,11 +42,12 @@ def main():
   uploaded_file = st.file_uploader("Upload image", type=['jpeg', 'png', 'jpg', 'webp'])
   threshold=0.7
   if uploaded_file is not None:
-     file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
-     image = cv2.imdecode(file_bytes, 1)
+     path_in = uploaded_file.name
+     #file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+     #image = cv2.imdecode(file_bytes, 1)
      # Call the function and display the result in Streamlit
-     result=predict_image(image, model,threshold)
-     st.image(image, caption='Input image', use_column_width=True)
+     result=predict_image(path_in, model,threshold)
+     #st.image(image, caption='Input image', use_column_width=True)
      st.write('Prediction:', result)
      
      
