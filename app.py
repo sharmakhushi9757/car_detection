@@ -22,7 +22,7 @@ segmenter = SegmentationAlgorithm('slic', n_segments=50, compactness=10, sigma=1
 #
 def predict_image(img, model, threshold):
     # Load image and preprocess it
-    img = load_img(img, model.input_shape[1:4])
+    img = load_img(img,target_size=(64,64,3))
     img_array = img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
     img_array /= 255.
