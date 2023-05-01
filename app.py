@@ -24,9 +24,9 @@ def predict_image(img, model, threshold):
     
     # Check if the prediction is above the threshold
     if prediction >= threshold:
-        result = 'damaged'
-    else:
         result = 'not damaged'
+    else:
+        result = 'damaged'
     
     
     # Return prediction and explanation as a dictionary
