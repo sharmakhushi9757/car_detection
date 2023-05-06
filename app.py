@@ -63,5 +63,6 @@ def main():
         else:
             st.write("Are you sure that your car is damaged? Please submit another picture of the damage.")
             st.write("Hint: Try zooming in/out, using a different angle or different lighting")
+        progress_bar = st.progress(100)
         
 main()
