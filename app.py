@@ -63,23 +63,5 @@ def main():
         else:
             st.write("Are you sure that your car is damaged? Please submit another picture of the damage.")
             st.write("Hint: Try zooming in/out, using a different angle or different lighting")
-        result1=predictimage(uploaded_file, model_location, threshold)
-        pred_labels = np.argmax(result1, axis=1)
-        d = {0:'Front', 1:'Rear', 2:'Side'}
-        for key in d.keys():
-            if pred_labels[0] == key:
-                st.write("Validating location of damage....Result:",d[key])
-        result2=predictimage_1(uploaded_file, model_location, threshold)
-        pred_labels_1 = np.argmax(result2, axis=1)
-        d_1 = {0:'minor', 1:'moderate', 2:'severe'}
-        for key in d_1.keys():
-            if pred_labels_1[0] == key:
-                st.write("Validating severity of damage....Result:",d_1[key])
-        st.write("Severity assessment complete.")
         
-        progress_bar.progress(100)
-  else:
-    st.warning('Please upload an image.')
-        
-
 main()
