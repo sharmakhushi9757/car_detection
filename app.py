@@ -35,7 +35,7 @@ def predict_image(img, model, threshold):
     img_array = np.expand_dims(img_array, axis=0)
     
     # Make predictions using the model
-    prediction = model.predict(img_array)[0][0]
+    prediction = model.predict(img_array)
     print("Validating that damage exists....")
     print(prediction)
     if(prediction[0][0]<=0.5):
