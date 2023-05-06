@@ -55,7 +55,7 @@ def main():
         progress_bar = st.progress(0)
         result=predict_image(uploaded_file, model, threshold)
         progress_bar.progress(100)
-        if(result[0][0]<=0.5):
+        if(result[0][0]>=0.5):
             st.write("Validation complete - proceed to location and severity determination")
         else:
             st.write("Are you sure that your car is damaged? Please submit another picture of the damage.")
