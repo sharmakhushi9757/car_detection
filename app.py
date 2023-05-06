@@ -10,7 +10,7 @@ from tensorflow.keras.preprocessing.image import load_img , img_to_array
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 import streamlit as st
 
-
+model=tf.keras.models.load_model(r"dmg_car-weights-CNN.h5")
 model_damage = tf.keras.models.load_model(r"damagemodel.h5")
 model_location= tf.keras.models.load_model(r"locationmodel.h5")
 model_serverity= tf.keras.models.load_model(r"serverity_model.h5")
@@ -57,7 +57,7 @@ def main():
   uploaded_file = st.file_uploader('Upload an image', type=['jpg', 'jpeg', 'png'])
   if st.button('Predict'):
         progress_bar = st.progress(0)
-        result=predict_image(uploaded_file, model_damage, threshold)
+        result=predict_image(uploaded_file, model, threshold)
         if(result[0][0]>=0.5):
             st.write("Validation complete - proceed to location and severity determination")
         else:
