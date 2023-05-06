@@ -23,10 +23,10 @@ def pipe2(image_path, model):
     print("Validating that damage exists....")
     print(pred)
     if(pred[0][0]<=0.5):
-        print("Validation complete - proceed to location and severity determination")
+        st.write("Validation complete - proceed to location and severity determination")
     else:
-        print ("Are you sure that your car is damaged? Please submit another picture of the damage.")
-        print ("Hint: Try zooming in/out, using a different angle or different lighting")    
+        st.write("Are you sure that your car is damaged? Please submit another picture of the damage.")
+        st.write("Hint: Try zooming in/out, using a different angle or different lighting")    
 
 def predict_image(img, model, threshold):
     # Load and preprocess the image
@@ -36,13 +36,8 @@ def predict_image(img, model, threshold):
     
     # Make predictions using the model
     prediction = model.predict(img_array)
-    print("Validating that damage exists....")
-    print(prediction)
-    if(prediction[0][0]<=0.5):
-        print("Validation complete - proceed to location and severity determination")
-    else:
-        print ("Are you sure that your car is damaged? Please submit another picture of the damage.")
-        print ("Hint: Try zooming in/out, using a different angle or different lighting")   
+    return prediction
+    
     
     # Return prediction and explanation as a dictionary
 
@@ -58,8 +53,13 @@ def main():
   uploaded_file = st.file_uploader('Upload an image', type=['jpg', 'jpeg', 'png'])
   if st.button('Predict'):
         progress_bar = st.progress(0)
-        predict_image(uploaded_file, model, threshold)
+        result=predict_image(uploaded_file, model, threshold)
         progress_bar.progress(100)
+        if(result[0][0]<=0.5):
+            st.write("Validation complete - proceed to location and severity determination")
+        else:
+            st.write("Are you sure that your car is damaged? Please submit another picture of the damage.")
+            st.write("Hint: Try zooming in/out, using a different angle or different lighting")   
  
   else:
     st.warning('Please upload an image.')
