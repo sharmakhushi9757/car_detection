@@ -26,19 +26,6 @@ def predict_image(img, model, threshold):
     return prediction
 
 
-def pipe31(image, model):
-    img = load_img(img, target_size=model.input_shape[1:4])
-    img_array = img_to_array(img)
-    img_array = np.expand_dims(img_array, axis=0)
-    img_array = img_array.reshape((1,)+x.shape)/255
-    pred = model.predict(x)
-    return pred
-    pred_labels = np.argmax(pred, axis=1)
-    d = {0:'Front', 1:'Rear', 2:'Side'}
-    for key in d.keys():
-        if pred_labels[0] == key:
-            print("Validating location of damage....Result:",d[key])
-
 def predictimage(img, model, threshold):
     # Load and preprocess the image
     img = load_img(img, target_size=model.input_shape[1:4])
@@ -49,11 +36,17 @@ def predictimage(img, model, threshold):
     prediction = model.predict(img_array)
     return prediction
     
+
     
-    # Return prediction and explanation as a dictionary
-
-
-#
+def predictimage_1(img, model, threshold):
+    # Load and preprocess the image
+    img = load_img(img, target_size=model.input_shape[1:4])
+    img_array = img_to_array(img)
+    img_array = np.expand_dims(img_array, axis=0)
+    # Make predictions using the model
+    prediction = model.predict(img_array)
+    return prediction
+    
 
 st.title('Car Damage Predictor')
 st.write("---")
@@ -76,12 +69,17 @@ def main():
         for key in d.keys():
             if pred_labels[0] == key:
                 st.write("Validating location of damage....Result:",d[key])
+        result2=predictimage_1(uploaded_file, model_location, threshold)
+        pred_labels_1 = np.argmax(result2, axis=1)
+        d_1 = {0:'minor', 1:'moderate', 2:'severe'}
+        for key in d_1.keys():
+            if pred_labels_1[0] == key:
+                st.write("Validating severity of damage....Result:",d_1[key])
         st.write("Severity assessment complete.")
         
         progress_bar.progress(100)
   else:
     st.warning('Please upload an image.')
         
-
 
 main()
