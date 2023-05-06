@@ -38,7 +38,7 @@ def predict_image(img, model, threshold):
     prediction = model.predict(img_array)[0][0]
     print("Validating that damage exists....")
     print(prediction)
-    if(pred[0][0]<=0.5):
+    if(prediction[0][0]<=0.5):
         print("Validation complete - proceed to location and severity determination")
     else:
         print ("Are you sure that your car is damaged? Please submit another picture of the damage.")
