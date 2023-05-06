@@ -1,13 +1,3 @@
-numpy
-tensorflow
-opencv-python-headless==4.5.3.56
-mtcnn-opencv
-numpy
-scipy
-Pillow
-cython
-matplotlib
-scikit-image
-keras
-h5py
-lime
+version https://git-lfs.github.com/spec/v1
+oid sha256:09510293855d96dbbee73922605265f4f56b823f1d0cfcc733fef98120e217f4
+size 129
