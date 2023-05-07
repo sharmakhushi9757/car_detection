@@ -12,8 +12,8 @@ import streamlit as st
 
 
 model = tf.keras.models.load_model(r"dmg_car-weights-CNN.h5")
-model_location= tf.keras.models.load_model(r"models/model3_loc.h5")
-model_severity= tf.keras.models.load_model(r"models/model3_sev.h5")
+model_location= tf.keras.models.load_model(r"locationmodel.h5")
+model_severity= tf.keras.models.load_model(r"severity_model.h5")
 
 #
 
